@@ -2,7 +2,6 @@ const express = require('express');
 const faker = require('faker');
 const router = express.Router();
 
-
 router.get('/', (req, res) => {
   const products = [];
   const { size } = req.query;
@@ -19,18 +18,42 @@ router.get('/', (req, res) => {
 });
 
 router.get('/filter', (req, res) => {
-  res.send('Soy un filtro');
+  res.status(200).send('Soy un filtro');
 });
 
 router.get('/:id', (req, res) => {
-  // const id = req.params.id;
   const { id } = req.params;
-  res.json({
+  res.status(200).json({
     id,
     name: 'Product 2',
     price: 1000,
   });
 });
 
+router.post('/', (req, res) => {
+  const body = req.body;
+  res.status(201).json({
+    message: 'created',
+    data: body,
+  });
+});
+
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    id,
+    message: 'update',
+    data: body,
+  });
+});
+
+router.delete('/:id', (req, res) =>{
+  const {id} = req.params;
+  res.json({
+    id,
+    message: 'deleted'
+  });
+});
 
 module.exports = router;
