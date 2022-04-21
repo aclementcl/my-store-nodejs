@@ -33,6 +33,7 @@ class ProductsService {
   }
 
   async findOne(id) {
+    const test = this.getalgo();
     return this.products.find((item) => item.id === id);
   }
 
