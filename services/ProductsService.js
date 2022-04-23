@@ -1,15 +1,16 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
-const pool = require('../libs/postgresPool');
+// const pool = require('../libs/postgresPool');
+const sequelize = require('../libs/sequelize');
 
 class ProductsService {
   constructor() {
     this.products = [];
     this.generate();
-    this.pool = pool;
-    this.pool.on('error', (err) => {
-      console.log(err);
-    });
+    // this.pool = pool;
+    // this.pool.on('error', (err) => {
+    //   console.log(err);
+    // });
   }
 
   generate() {
@@ -20,7 +21,7 @@ class ProductsService {
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.imageUrl(),
-        isBlock: faker.datatype.boolean()
+        isBlock: faker.datatype.boolean(),
       });
     }
   }
@@ -37,16 +38,16 @@ class ProductsService {
 
   async find() {
     const query = 'SELECT * FROM tasks';
-    const response =  await this.pool.query(query);
-    return response.rows;
+    const [data] = await sequelize.query(query);
+    return data;
   }
 
   async findOne(id) {
     const product = this.products.find((item) => item.id === id);
-    if(!product){
+    if (!product) {
       throw boom.notFound('El producto no fue encontrado');
     }
-    if(product.isBlock){
+    if (product.isBlock) {
       throw boom.conflict('El producto esta bloqueado');
     }
     return product;
@@ -60,8 +61,8 @@ class ProductsService {
     const product = this.products[index];
     this.products[index] = {
       ...product,
-      ...changes
-    }
+      ...changes,
+    };
     return this.products[index];
   }
 
