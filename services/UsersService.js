@@ -12,7 +12,8 @@ class UsersService {
   }
 
   async create(data) {
-    return data;
+    const newUser = await models.User.create(data);
+    return newUser;
   }
 
   async find() {
@@ -24,15 +25,22 @@ class UsersService {
   }
 
   async findOne(id) {
-    const response = await models.User.find(id);
-    return response;
+    const user = await models.User.findByPk(id);
+    if(!user){
+      throw boom.notFound('El usuario no existe');
+    }
+    return user;
   }
 
   async update(id, changes) {
-    return changes;
+    const user = await this.findOne(id);
+    const response = await user.update(changes);
+    return response;
   }
 
   async delete(id) {
+    const user = await this.findOne(id);
+    await user.destroy();
     return { id };
   }
 }
