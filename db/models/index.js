@@ -1,5 +1,5 @@
-const { USER_TABLE, UserSchema, User } = require('./userModel');
-const { PRODUCT_TABLE, ProductSchema, Product } = require('./productModel');
+const { USER_TABLE, UserSchema, User } = require('./user.model');
+const { PRODUCT_TABLE, ProductSchema, Product } = require('./product.model');
 
 function setupModels(sequelize){
   User.init(UserSchema, User.config(sequelize));
