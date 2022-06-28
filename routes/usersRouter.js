@@ -3,7 +3,7 @@ const UsersService = require('../services/UsersService');
 const router = express.Router();
 const service = new UsersService();
 const validatorHandler = require('../middlewares/validatorHandler');
-const { createUserDto, updateUserDto, getUserDto } = require('../dto/userDto');
+const { createUserDto, updateUserDto, getUserDto } = require('../schemas/user.schema');
 
 // router.get('/', (req, res) => {
 //   const { limit, offset } = req.query;
