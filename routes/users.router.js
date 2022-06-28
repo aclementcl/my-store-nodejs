@@ -3,7 +3,7 @@ const UsersService = require('../services/UsersService');
 const router = express.Router();
 const service = new UsersService();
 const validatorHandler = require('../middlewares/validatorHandler');
-const { createUserDto, updateUserDto, getUserDto } = require('../schemas/user.schema');
+const { createUserSchema, updateUserSchema, getUserschema } = require('../schemas/user.schema');
 
 // router.get('/', (req, res) => {
 //   const { limit, offset } = req.query;
@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
 
 router.get(
   '/:id',
-  validatorHandler(getUserDto, 'params'),
+  validatorHandler(getUserschema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -42,7 +42,7 @@ router.get(
 
 router.post(
   '/',
-  validatorHandler(createUserDto, 'body'),
+  validatorHandler(createUserSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
@@ -56,8 +56,8 @@ router.post(
 
 router.patch(
   '/:id',
-  validatorHandler(getUserDto, 'params'),
-  validatorHandler(updateUserDto, 'body'),
+  validatorHandler(getUserschema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

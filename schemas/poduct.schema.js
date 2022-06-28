@@ -5,20 +5,20 @@ const name = Joi.string().min(3).max(15);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
 
-const createProductDto = Joi.object({
+const createProductSchema = Joi.object({
   name: name.required(),
   price: price.required(),
   image: image.required()
 });
 
-const updateProductDto = Joi.object({
+const updateProductSchema = Joi.object({
   name: name,
   price: price,
   imgage: image
 });
 
-const getProductDto = Joi.object({
+const getProductSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductDto, updateProductDto, getProductDto };
+module.exports = { createProductSchema, updateProductSchema, getProductSchema };
