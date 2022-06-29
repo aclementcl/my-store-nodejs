@@ -20,7 +20,9 @@ class UsersService {
     // const query = 'SELECT * FROM tasks';
     // const response = await pool.query(query);
     // return response.rows;
-    const response = await models.User.findAll();
+    const response = await models.User.findAll({
+      include: ['customer']
+    });
     return response;
   }
 
