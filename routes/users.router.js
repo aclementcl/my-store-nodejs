@@ -1,5 +1,5 @@
 const express = require('express');
-const UsersService = require('../services/UsersService');
+const UsersService = require('../services/user.service');
 const router = express.Router();
 const service = new UsersService();
 const validatorHandler = require('../middlewares/validatorHandler');

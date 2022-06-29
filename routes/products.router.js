@@ -1,5 +1,5 @@
 const express = require('express');
-const ProductsService = require('../services/ProductsService');
+const ProductsService = require('../services/product.service');
 const validatorHandler = require('../middlewares/validatorHandler');
 const {
   createProductSchema,
@@ -13,10 +13,6 @@ const service = new ProductsService();
 router.get('/', async (req, res) => {
   const products = await service.find();
   res.status(200).json(products);
-});
-
-router.get('/filter', (req, res) => {
-  res.status(200).send('Soy un filtro');
 });
 
 router.get(
